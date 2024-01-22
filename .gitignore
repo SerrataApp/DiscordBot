@@ -2,3 +2,6 @@ node_modules
 .env
 config.json
 .idea
+./k8s/discordbot/secret.yml
+.\k8s\discordbot\secret.yml
+secret.yml
