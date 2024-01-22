@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: bot-discord
+    namespace: serrata
+    labels:
+        app: bot-discord
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: bot-discord
+    template:
+        metadata:
+            labels:
+                app: bot-discord
+        spec:
+            containers:
+                - name: bot-discord
+                  image: tang0ch4rlie/serrata-discord-bot:latest
+                  imagePullPolicy: Always
+                  resources:
+                      requests:
+                          cpu: '250m'

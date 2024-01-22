@@ -33,9 +33,27 @@ jobs:
                 with:
                     context: .
                     push: true
-                    tags: tang0ch4rlie/serrata-discord-bot:latest
+                    tags: tang0ch4rlie/serrata-discord-bot:${{ steps.commit.outputs.short }}
                 env:
                     PERSONNAL_TOKEN: ${{secrets.PERSONNAL_TOKEN}}
                     CLIENTID: ${{secrets.CLIENTID}}
                     GUILDID: ${{secrets.GUILDID}}
                     TOKEN: ${{secrets.TOKEN}}
+    deploy:
+        name: Deploy to Kubernetes Cluster
+        needs: build_and_push
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout Repo
+                uses: actions/checkout@v2
+            -   id: commit
+                uses: prompt/actions-commit-hash@v3
+            -   name: Set Kubernetes Context
+                uses: azure/k8s-set-context@v1
+                with:
+                    method: kubeconfig
+                    kubeconfig: ${{ secrets.KUBE_CONFIG }}
+            -   name: Replace Image Label
+                run: sed -i'' -e 's/IMAGE_LABEL/${{ steps.commit.outputs.short }}/g' ".github/k8s/deployment.yml"
+            -   name: Deploy to Cluster
+                run: kubectl apply -f ".github/k8s/deployment.yml"
