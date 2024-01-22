@@ -18,6 +18,27 @@ spec:
             containers:
                 - name: bot-discord
                   image: tang0ch4rlie/serrata-discord-bot:IMAGE_LABEL
+                  env:
+                      - name: PERSONNAL_TOKEN
+                        valueFrom:
+                            secretKeyRef:
+                                name: bot-discord-secret
+                                key: PERSONNAL_TOKEN
+                      - name: CLIENTID
+                        valueFrom:
+                            secretKeyRef:
+                                name: bot-discord-secret
+                                key: CLIENTID
+                      - name: GUILDID
+                        valueFrom:
+                            secretKeyRef:
+                                name: bot-discord-secret
+                                key: GUILDID
+                      - name: TOKEN
+                        valueFrom:
+                            secretKeyRef:
+                                name: bot-discord-secret
+                                key: TOKEN
                   imagePullPolicy: Always
                   resources:
                       requests:
