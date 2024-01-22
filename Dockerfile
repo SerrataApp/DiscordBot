@@ -91,5 +91,6 @@ WORKDIR /usr/src/app
 COPY package*.json .
 RUN npm install
 COPY . .
+RUN ls
 RUN node deploy-commands.js
 CMD [ "node", "index.js"]
