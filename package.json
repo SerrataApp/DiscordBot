@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.14.1"
+    "@octokit/core": "^5.1.0",
+    "@octokit/plugin-rest-endpoint-methods": "^10.2.0",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.2"
   }
 }
