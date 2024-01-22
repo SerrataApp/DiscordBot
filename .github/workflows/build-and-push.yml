@@ -34,3 +34,8 @@ jobs:
                     context: .
                     push: true
                     tags: tang0ch4rlie/serrata-discord-bot:${{ steps.commit.outputs.short }}
+                env:
+                    PERSONNAL_TOKEN: ${{secrets.PERSONNAL_TOKEN}}
+                    CLIENTID: ${{secrets.CLIENTID}}
+                    GUILDID: ${{secrets.GUILDID}}
+                    TOKEN: ${{secrets.TOKEN}}
